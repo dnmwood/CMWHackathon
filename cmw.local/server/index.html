@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      google.charts.setOnLoadCallback(init);
+     function init() {
+      var options = {
+        width: 800,
+        height: 440,
+        animation:{
+          duration: 1000,
+          easing: 'out',
+        },
+        vAxis: {minValue:0, maxValue:100}
+      };
+
+      // var data = new google.visualization.DataTable();
+      // data.addColumn('string', 'N');
+      // data.addColumn('number', 'Value');
+      // data.addColumn({ role: 'style' }, 'Value');
+      // data.addRow(['Jeff', 100, 'silver']);
+      // data.addRow(['Jeff', 100, 'silver']);
+      // data.addRow(['Jeff', 100, 'silver']);
+      // data.addRow(['Jeff', 100, 'silver']);
+
+      var jsonTest = {
+          'name': 'Good Kid',
+          'genres': ['Rock', 'Pop', 'Indie', 'Music'],
+          'Percentage': [12, 55, 23, 33]
+      };
+
+      var data = google.visualization.arrayToDataTable([
+         ['Genre', 'Percentage', { role: 'style' }],
+         [jsonTest['genres'][0], 0, '#b87333'],            // RGB value
+         [jsonTest['genres'][1], 0, 'silver'],            // English color name
+         [jsonTest['genres'][2], 0, 'gold'],
+         [jsonTest['genres'][3], 0, 'red' ], // CSS-style declaration
+      ]);
+
+      var chart = new google.visualization.ColumnChart(
+          document.getElementById('visualization'));
+      var button = document.getElementById('b1');
+
+      function drawChart() {
+        // Disabling the button while the chart is drawing.
+        button.disabled = true;
+        google.visualization.events.addListener(chart, 'ready',
+            function() {
+              button.disabled = false;
+            });
+        chart.draw(data, options);
+      }
+
+      button.onclick = function() {
+        var newValue = jsonTest['Percentage'][0] - data.getValue(0, 1);
+        data.setValue(0, 1, newValue);
+        var newValue2 = jsonTest['Percentage'][1] - data.getValue(1, 1);
+        data.setValue(1, 1, newValue2);
+        var newValue3 = jsonTest['Percentage'][2] - data.getValue(2, 1);
+        data.setValue(2, 1, newValue3);
+        var newValue4 = jsonTest['Percentage'][3] - data.getValue(3, 1);
+        data.setValue(3, 1, newValue4);
+        drawChart();
+      }
+      drawChart();
+    }
+
+    fetch('//localhost:8080/percentage')
+    .then(res => res.json())
+    .then(obj => {
+      console.log(obj);
+    })
+    .catch(e => console.error(e));
+
+    </script>
+  </head>
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="visualization"></div>
+    <button id="b1">TELL ME WHAT I SOUND LIKE!</div>
+  </body>
+</html>
