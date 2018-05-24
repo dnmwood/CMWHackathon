@@ -26,7 +26,7 @@ while True:
     # if it didn't find anything lets assume we are at the end
     if div is None or item_number == 1000:
         print("Proccessed {} genres and {} bands.".format(item_number, len(band_map.keys())))
-        
+
         # write to CSV
         print("Writing to {}".format(CSV_FILE_PATH))
         with open(CSV_FILE_PATH, "wb+") as csv_file:
@@ -38,7 +38,7 @@ while True:
                 # here we use " as the special delimiter for lists
                 # hope my catch all unicode encoder strip works
                 csv_file.write("{},{},\"{}\"\n".format(i + 1, band.encode('utf-8').strip(), genres.encode('utf-8').strip()))
-        
+
         break
 
     # remove the last character since its a weird non-ascii chevron
@@ -63,7 +63,7 @@ while True:
         if band_div is None:
             # end of the list
             break
-        
+
         # remove the last character since its a weird non-ascii chevron
         band = band_div.getText()[:-2]
 

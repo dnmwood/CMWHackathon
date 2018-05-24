@@ -2,11 +2,13 @@ html {
   font-family: 'Raleway', sans-serif;
   /* background: #FAFAFA; */
   background: white;
+  /* background-image: url("brain.png"); */
+
 }
 
 .artist-image {
   position: relative;
-  left: 43vw;
+  left: 44.5vw;
   top: 5%;
 }
 
@@ -17,8 +19,8 @@ img {
 #visualization {
   position: absolute;
   text-align: center;
-  top: 49%;
-  left: 21.5%;
+  top: 55%;
+  left: 24%;
 }
 
 #b1 {
@@ -42,6 +44,7 @@ img {
   text-align: center;
   font-size: 20px;
   border-radius: 10px;
+  margin-right: 10px;
   width: 500px;
   height: 38px;
 }
